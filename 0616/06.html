@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-4.0.0.js"></script>
+
+    <script>
+        $(document).ready(
+            function(){
+                $("#btn_fadetoggle").click(
+                    function(){
+                        $(".page").fadeToggle(2000);
+
+                    }
+                );
+                $("#btn_toggle").click(
+                    function(){
+                        $(".page").toggle(2000);
+                    }
+                );
+                $("#btn_slietoggle").click(
+                    function(){
+                        $(".page").slideToggle(2000);
+
+                    }
+                );
+            }
+        )
+    </script>
+    </head>
+<body>
+    <button id="btn_fadetoggle">Show Fade Toggle</button>&nbsp;&nbsp;
+    <button id="btn_etoggle">Show Toggle</button>&nbsp;&nbsp;
+    <button id="btn_slietoggle">Show Slide Toggle</button>
+
+    <div class="page">
+        <h1>jQuery Fade Toggle</h1>
+        <p>
+            This is a simple example of using jQuery's fadeToggle method.This is a simple example of using jQuery's fadeToggle method.This is a simple example of using jQuery's fadeToggle method.This is a simple example of using jQuery's fadeToggle method.This is a simple example of using jQuery's fadeToggle method.
+            This is a simple example of using jQuery's fadeToggle method.This is a simple example of using jQuery's fadeToggle method.This is a simple example of using jQuery's fadeToggle method.This is a simple example of using jQuery's fadeToggle method.This is a simple example of using jQuery's fadeToggle method.
+            This is a simple example of using jQuery's fadeToggle method.This is a simple example of using jQuery's fadeToggle method.This is a simple example of using jQuery's fadeToggle method.This is a simple example of using jQuery's fadeToggle method.This is a simple example of using jQuery's fadeToggle method.
+            This is a simple example of using jQuery's fadeToggle method.This is a simple example of using jQuery's fadeToggle method.This is a simple example of using jQuery's fadeToggle method.This is a simple example of using jQuery's fadeToggle method.This is a simple example of using jQuery's fadeToggle method.
+            This is a simple example of using jQuery's fadeToggle method.This is a simple example of using jQuery's fadeToggle method.This is a simple example of using jQuery's fadeToggle method.This is a simple example of using jQuery's fadeToggle method.This is a simple example of using jQuery's fadeToggle method.
+            This is a simple example of using jQuery's fadeToggle method.This is a simple example of using jQuery's fadeToggle method.This is a simple example of using jQuery's fadeToggle method.This is a simple example of using jQuery's fadeToggle method.This is a simple example of using jQuery's fadeToggle method.
+            This is a simple example of using jQuery's fadeToggle method.This is a simple example of using jQuery's fadeToggle method.This is a simple example of using jQuery's fadeToggle method.This is a simple example of using jQuery's fadeToggle method.This is a simple example of using jQuery's fadeToggle method.
+        </p>
+    </div>
+    </div>
+</body>
+</html>

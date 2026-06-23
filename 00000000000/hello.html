@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Run & Record: Step to Master</title>
+    <style>
+        /* CSS3 변수: 다크 모드를 기본값으로 설정 */
+        :root {
+            --bg-color: #121212;
+            --text-color: #ecf0f1;
+            --text-muted: #95a5a6;
+            --header-bg: #1a1a1a;
+            --panel-bg: #1e1e1e;
+            --panel-shadow: rgba(0,0,0,0.5);
+            --section-light: #181818;
+            --border-color: #2c3e50;
+            --primary-blue: #3498db;
+            --primary-blue-hover: #2980b9;
+            --primary-green: #2ecc71;
+            --accent-orange: #f39c12;
+            --accent-red: #e74c3c;
+            --glass-bg: rgba(30, 30, 30, 0.8);
+            --glass-blur: blur(10px);
+        }
+
+        /* 기본 초기화 및 부드러운 스크롤 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'SF Pro Display', 'Malgun Gothic', sans-serif;
+            line-height: 1.6;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        /* 헤더 스타일 */
+        header {
+            background-color: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px var(--panel-shadow);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 85%;
+            margin: auto;
+        }
+
+        header h1 {
+            color: var(--primary-blue);
+            font-weight: 800;
+            font-size: 1.8rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover { color: var(--primary-blue); }
+
+        /* 메인 배너 영역 */
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('imag/image_1.png') no-repeat center center/cover;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-content h2 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            color: #ffffff;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #dddddd;
+        }
+
+        /* 공통 섹션 스타일 */
+        .content-section {
+            padding: 80px 10%;
+            text-align: center;
+        }
+
+        .content-section h2 {
+            margin-bottom: 50px;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+        }
+
+        .bg-alt { background-color: var(--section-light); }
+
+        .content-container {
+            width: 100%; max-width: 950px; margin: auto;
+            border-radius: 20px; overflow: hidden;
+            box-shadow: 0 10px 30px var(--panel-shadow);
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border-color);
+        }
+
+        /* 대시보드 UI */
+        .tracker-container {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .panel {
+            background-color: var(--panel-bg);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            flex: 1;
+            min-width: 320px;
+            text-align: left;
+        }
+
+        /* 입력 폼 스타일 */
+        .input-group { margin-bottom: 15px; }
+        .input-group label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; color: var(--text-muted); }
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: #252525;
+            color: white;
+            font-size: 1rem;
+        }
+
+        button.submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-blue);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .record-list {
+            list-style: none;
+            margin-top: 10px;
+        }
+
+        .record-list li {
+            padding: 15px 0;
+            border-bottom: 1px solid #2a2a2a;
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.05rem;
+        }
+
+        .record-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* 러닝 팁 카드 */
+        .card-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .card {
+            background-color: var(--panel-bg);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            flex: 1 1 250px;
+            text-align: left;
+        }
+
+        footer { text-align: center; padding: 50px; background-color: #0a0a0a; color: var(--text-muted); border-top: 1px solid var(--border-color); }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>Run & Record</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#story">Story</a></li>
+                    <li><a href="#tracker">Record</a></li>
+                    <li><a href="#tips">Tips</a></li>
+                    <li><a href="#glossary">Terms</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero-section">
+        <div class="hero-content">
+            <h2>나의 한계를 넘어서는 시간</h2>
+            <p>매일의 기록을 쌓아 마스터 러너에 도전하세요!</p>
+        </div>
+    </section>
+
+    <section id="story" class="content-section bg-alt">
+        <h2>나의 러닝 스토리</h2>
+        <div class="content-container" style="padding: 40px; text-align: left;">
+            <article>
+                <h3 style="color: var(--primary-blue); margin-bottom: 15px;">시작은 미약했으나</h3>
+                <p style="margin-bottom: 20px; color: var(--text-muted);">처음 지인의 권유로 러닝화 끈을 묶었을 때만 해도 3km를 뛰는 것조차 버거웠습니다. 하지만 끈기 있게 도전하여 이제는 일상의 즐거움이 되었습니다.</p>
+                <blockquote style="border-left: 4px solid var(--accent-orange); padding-left: 15px; margin: 20px 0; font-style: italic; color: var(--text-color);">
+                    "중요한 것은 속도가 아니라, 멈추지 않고 나아가는 마음입니다."
+                </blockquote>
+                <p style="color: var(--text-muted);">지금은 5km를 6분 페이스로 완주하는 것을 목표로 매일 훈련 스케줄을 소화하고 있습니다.</p>
+            </article>
+        </div>
+    </section>
+
+    <section id="tracker" class="content-section">
+        <h2>러닝 다이어리</h2>
+        <div class="tracker-container">
+            <!-- 기록 입력 패널 -->
+            <div class="panel">
+                <h3 style="margin-bottom: 20px;">기록 입력</h3>
+                <form id="record-form">
+                    <div class="input-group">
+                        <label for="run-date">날짜</label>
+                        <input id="run-date" type="date" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="run-distance">달린 거리 (km)</label>
+                        <input id="run-distance" type="number" placeholder="예: 5" step="0.1" required>
+                    </div>
+                    <button type="submit" class="submit-btn">기록 저장</button>
+                </form>
+            </div>
+
+            <!-- 지난 기록 리스트 패널 -->
+            <div class="panel">
+                <h3 style="margin-bottom: 20px;">나의 러닝 기록</h3>
+                <ul id="record-list" class="record-list">
+                    <li><span style="color: var(--text-muted);">📅 2026-05-13</span> <span style="font-weight: bold; color: var(--primary-blue);">🏃 5.0km</span></li>
+                    <li><span style="color: var(--text-muted);">📅 2026-05-11</span> <span style="font-weight: bold; color: var(--primary-blue);">🏃 4.2km</span></li>
+                    <li><span style="color: var(--text-muted);">📅 2026-05-09</span> <span style="font-weight: bold; color: var(--primary-blue);">🏃 3.0km</span></li>
+                    <li><span style="color: var(--text-muted);">📅 2026-05-07</span> <span style="font-weight: bold; color: var(--primary-blue);">🏃 2.5km</span></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="tips" class="content-section bg-alt">
+        <h2>러닝 가이드</h2>
+        <div class="card-container">
+            <div class="card">
+                <h4 style="color: var(--primary-blue); margin-bottom: 10px;">올바른 자세</h4>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">상체를 곧게 펴고 시선은 20m 앞을 향하세요.</p>
+            </div>
+            <div class="card">
+                <h4 style="color: var(--primary-green); margin-bottom: 10px;">페이스 조절</h4>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">대화가 가능한 정도의 숨차기가 적당합니다.</p>
+            </div>
+            <div class="card">
+                <h4 style="color: var(--accent-red); margin-bottom: 10px;">호흡법</h4>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">코와 입을 모두 사용해 리드미컬하게 호흡하세요.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="glossary" class="content-section">
+        <h2>러닝 용어 사전</h2>
+        <div class="content-container" style="padding: 30px; text-align: left;">
+            <dl>
+                <dt style="font-weight: bold; color: var(--primary-blue);">🏃 페이스 (Pace)</dt>
+                <dd style="margin: 5px 0 15px 20px; color: var(--text-muted);">1km를 달리는 데 걸리는 시간입니다.</dd>
+                <dt style="font-weight: bold; color: var(--primary-green);">🏃 케이던스 (Cadence)</dt>
+                <dd style="margin: 5px 0 15px 20px; color: var(--text-muted);">1분당 발이 지면에 닿는 횟수입니다.</dd>
+                <dt style="font-weight: bold; color: var(--accent-orange);">🏃 LSD (Long Slow Distance)</dt>
+                <dd style="margin: 5px 0 0 20px; color: var(--text-muted);">긴 거리를 천천히 달리는 지구력 훈련법입니다.</dd>
+            </dl>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Run & Record. All rights reserved.</p>
+        <p style="font-size: 0.8rem; margin-top: 10px;">Created with HTML5 & CSS3</p>
+    </footer>
+
+    <script>
+        const STORAGE_KEY = 'runRecords';
+        const MAX_RECORDS = 10;
+        const recordList = document.getElementById('record-list');
+        const form = document.getElementById('record-form');
+        const dateInput = document.getElementById('run-date');
+        const distanceInput = document.getElementById('run-distance');
+
+        function loadRecords() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            return saved ? JSON.parse(saved) : [
+                { date: '2026-05-13', distance: '5.0' },
+                { date: '2026-05-11', distance: '4.2' },
+                { date: '2026-05-09', distance: '3.0' },
+                { date: '2026-05-07', distance: '2.5' }
+            ];
+        }
+
+        function saveRecords(records) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(records.slice(0, MAX_RECORDS)));
+        }
+
+        function renderRecords(records) {
+            recordList.innerHTML = '';
+            records.slice(0, MAX_RECORDS).forEach(record => {
+                const li = document.createElement('li');
+                li.innerHTML = `<span style="color: var(--text-muted);">📅 ${record.date}</span> <span style="font-weight: bold; color: var(--primary-blue);">🏃 ${record.distance}km</span>`;
+                recordList.appendChild(li);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const records = loadRecords();
+            renderRecords(records);
+            saveRecords(records);
+
+            form.addEventListener('submit', event => {
+                event.preventDefault();
+                const date = dateInput.value;
+                const distance = parseFloat(distanceInput.value).toFixed(1);
+                if (!date || isNaN(distance)) {
+                    return;
+                }
+                const records = loadRecords();
+                records.unshift({ date, distance });
+                const limited = records.slice(0, MAX_RECORDS);
+                saveRecords(limited);
+                renderRecords(limited);
+                form.reset();
+            });
+        });
+    </script>
+</body>
+</html>
